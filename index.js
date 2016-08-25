@@ -87,9 +87,9 @@ screen.key(['escape', 'q', 'C-c'], function(ch, key) {
 
 repo.open(repoPath)
 	.then(rep => {		
+		rep.getRemote('origin').then(displayRemote);
 		rep.getCurrentBranch()
 		.then(displayBranch);
-		rep.getRemote('origin').then(displayRemote);
 		rep.getStatus()
 			.then(display);
 		rep.getHeadCommit().then(displayCommit);
