@@ -25,6 +25,7 @@ const statusBox = blessed.box({
 	left: 'center',
 	width: '100%',
 	height: '12%',
+	tags: true,
 	border: {
 	    type: 'line'
 	  },
@@ -86,15 +87,47 @@ screen.key(['escape', 'q', 'C-c'], function(ch, key) {
 
 repo.open(repoPath)
 	.then(rep => {		
-		rep.getCurrentBranch().then(displayBranch);
+		rep.getCurrentBranch()
+		.then(displayBranch);
+		rep.getRemote('origin').then(displayRemote);
 		rep.getStatus()
 			.then(display);
+		rep.getHeadCommit().then(displayCommit);
+		
 		});
 		
 
-function displayBranch(ref) {
-	statusBox.setContent(`Current branch: ${ref.name()}]`);
+function displayRemote(remote) {
+	const url = remote.url();
+	statusBox.setContent(`Remote:         {bold}origin{/bold} @ ${url}`);
 	screen.append(statusBox);
+	screen.render();
+}
+
+function displayCommit(commit) {
+	const hash = commit.toString().slice(0, 7);
+	const message = commit.message();
+	var currentContent = statusBox.getContent();
+	currentContent += '\n';
+	currentContent += `Head:           {bold}${hash}{/bold} ${message}`;
+
+	statusBox.setContent(currentContent);
+	screen.remove(statusBox);
+	screen.append(statusBox);
+	screen.render();
+}
+
+function displayBranch(ref) {
+	const currentBranch = ref.name()
+		.replace(/refs\/heads\//, '');
+	var currentContent = statusBox.getContent();
+	currentContent += '\n';
+	currentContent += `Current branch: {red-fg}${currentBranch}{/red-fg}`;
+
+	statusBox.setContent(currentContent);
+	screen.remove(statusBox);
+	screen.append(statusBox);
+	screen.render();
 }
 function display(statuses) {
 	const colored = statuses.map(status => status.path());
