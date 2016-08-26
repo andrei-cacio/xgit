@@ -19,4 +19,9 @@ const helpBox = box({
 	  }
 });
 
-module.exports = helpBox;
+function mount(screen) {
+	screen.append(helpBox);
+	screen.render();
+}
+
+module.exports = { mount };

@@ -1,10 +1,10 @@
 const screen = require('blessed').screen;
 
-const screen = blessed.screen({ smartCSR: true });
-screen.title = 'xGit';
+const defaultScreen = screen({ smartCSR: true });
+defaultScreen.title = 'xGit';
 
-screen.key(['escape', 'q', 'C-c'], function(ch, key) {
+defaultScreen.key(['escape', 'q', 'C-c'], function(ch, key) {
   return process.exit(0);
 });
 
-module.exports = screen;
+module.exports = defaultScreen;

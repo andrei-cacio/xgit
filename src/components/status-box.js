@@ -18,4 +18,15 @@ const statusBox = box({
 	  }
 });
 
-module.exports = statusBox;
+function mount(data, screen) {
+	'use strict';
+	let content = `Remote:         {bold}origin{/bold} @ ${data.originUrl} \n`;
+	content += `Current branch: {red-fg}${data.branch}{/red-fg} \n`;
+	content += `Head:           {bold}${data.head.hash}{/bold} ${data.head.message}`;
+
+	statusBox.setContent(content);
+	screen.append(statusBox);
+	screen.render();
+}
+
+module.exports = { mount };

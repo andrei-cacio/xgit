@@ -1,6 +1,7 @@
-const box = require('blessed').box;
+const blessedBox = require('blessed').box;
+const blessedList = require('blessed').list;
 
-const statusBox = box({
+const gitStatusBox = blessedBox({
 	top: 'center',
 	left: 'left',
 	width: '50%',
@@ -10,14 +11,37 @@ const statusBox = box({
 	  },
 	  style: {
 	    fg: 'white',
-	    bg: 'blue',
 	    border: {
 	      fg: '#f0f0f0'
-	    },
-	    hover: {
-	      bg: 'green'
 	    }
 	  }
 });
 
-module.exports = statusBox;
+const style = {
+	top: 'center',
+	border: {
+		bg: 'white'
+	},
+	selected: {
+		fg: 'blue'
+	},
+	item: {
+		fg: 'yellow'
+	}
+}
+
+function mount(data, screen) {
+	const list = blessedList({
+		items: data.files, 
+		keys: true, 
+		style: style, 
+		vi: true, 
+		parent: gitStatusBox
+	});
+
+	list.focus();
+	screen.append(gitStatusBox);
+	screen.render();
+}
+
+module.exports = { mount };
