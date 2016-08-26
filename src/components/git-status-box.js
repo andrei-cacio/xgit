@@ -6,6 +6,7 @@ const gitStatusBox = blessedBox({
 	left: 'left',
 	width: '50%',
 	height: '80%',
+	tags: true,
 	border: {
 	    type: 'line'
 	  },
@@ -42,9 +43,9 @@ function mount(data, screen) {
 
 		list.focus();
 	} else {
-		gitStatusBox.setContent('Nothing to commit (working directory clean)');
+		gitStatusBox.setContent('{center}{yellow-fg}Nothing to commit (working directory clean){/yellow-fg}{/center}');
 	}
-	
+
 	screen.append(gitStatusBox);
 	screen.render();
 }
