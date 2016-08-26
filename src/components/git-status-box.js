@@ -31,15 +31,20 @@ const style = {
 }
 
 function mount(data, screen) {
-	const list = blessedList({
-		items: data.files, 
-		keys: true, 
-		style: style, 
-		vi: true, 
-		parent: gitStatusBox
-	});
+	if (data.files.length) {
+		const list = blessedList({
+			items: data.files, 
+			keys: true, 
+			style: style, 
+			vi: true, 
+			parent: gitStatusBox
+		});
 
-	list.focus();
+		list.focus();
+	} else {
+		gitStatusBox.setContent('Nothing to show');
+	}
+	
 	screen.append(gitStatusBox);
 	screen.render();
 }
