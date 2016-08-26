@@ -42,7 +42,7 @@ function mount(data, screen) {
 
 		list.focus();
 	} else {
-		gitStatusBox.setContent('Nothing to show');
+		gitStatusBox.setContent('Nothing to commit (working directory clean)');
 	}
 	
 	screen.append(gitStatusBox);
