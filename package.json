@@ -11,5 +11,9 @@
   "devDependencies": {
     "blessed": "^0.1.81",
     "nodegit": "^0.14.1"
+  },
+  "dependencies": {
+    "rxflux": "git+https://github.com/andrei-cacio/rxflux.git",
+    "rxjs": "^5.0.0-beta.11"
   }
 }
