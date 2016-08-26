@@ -16,12 +16,8 @@ repoStore.subscribe(newState => {
 	const head = newState.get('head').toJS();
 	const files = newState.get('statusFiles').toJS();
 
-	if (originUrl && branch) {
-		statusBox.mount({ originUrl, branch, head }, screen);
-	}
-	if (files.length) {
-		gitStatusBox.mount({ files }, screen);
-	}
+	statusBox.mount({ originUrl, branch, head }, screen);
+	gitStatusBox.mount({ files }, screen);
 });
 
 actions.parseRepo();
