@@ -1,5 +1,3 @@
-const repo = require('nodegit').Repository;
-const ref = require('nodegit').Reference;
 const blessed = require('blessed');
 const screen = require('./src/components/screen');
 const statusBox = require('./src/components/status-box');
@@ -14,13 +12,14 @@ repoStore.subscribe(newState => {
 	const originUrl = newState.get('originUrl');
 	const branch = newState.get('branch');
 	const head = newState.get('head').toJS();
-	const files = newState.get('statusFiles').toJS();
+  const statusFiles = newState.get('statusFiles');
+	const files = (typeof statusFiles === 'object') ? statusFiles.toJS() : statusFiles;
 
 	statusBox.mount({ originUrl, branch, head }, screen);
 	gitStatusBox.mount({ files }, screen);
 });
 
-actions.parseRepo();
+actions.parseRepo(repoPath);
 helpBox.mount(screen);
 
 

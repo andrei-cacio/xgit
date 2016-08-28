@@ -6,7 +6,12 @@ const actionTypes = require('./action-types');
 function parseRepo(path) {
 	path = path || '.';
 	repo.open(path)
-		.then((rep) => getOriginUrl(rep));
+		.then((rep) => {
+            getOriginUrl(rep);
+            getBranchInfo(rep);
+            getHead(rep);
+            getGitStatus(rep);
+        });
 }
 
 function getOriginUrl(rep) {
@@ -18,7 +23,7 @@ function getOriginUrl(rep) {
 				payload: url 
 			});
 		});
-	getBranchInfo(rep);
+
 }
 
 function getBranchInfo(rep) {
@@ -30,7 +35,6 @@ function getBranchInfo(rep) {
 				payload: name 
 			});
 		});
-	getHead(rep);
 }
 
 function getHead(rep) {
@@ -43,7 +47,6 @@ function getHead(rep) {
 				payload: { hash, message } 
 			});
 		});
-	getGitStatus(rep);
 }
 
 function getGitStatus(rep) {

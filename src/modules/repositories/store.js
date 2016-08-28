@@ -8,7 +8,7 @@ const repoStore = {
 			hash: '',
 			message: ''
 		},
-		statusFiles: []
+		statusFiles: ''
 	},
 	actionMap: {
 		[actionTypes.GET_ORIGIN_URL]: handleOriginUrl,

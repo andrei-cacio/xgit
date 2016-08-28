@@ -32,19 +32,21 @@ const style = {
 }
 
 function mount(data, screen) {
-	if (data.files.length) {
-		const list = blessedList({
-			items: data.files, 
-			keys: true, 
-			style: style, 
-			vi: true, 
-			parent: gitStatusBox
-		});
+	if (!data.files) {
+		gitStatusBox.setContent('{center} Loading ... {/center}');
+	} else if (data.files.length) {
+    const list = blessedList({
+      items: data.files,
+      keys: true,
+      style: style,
+      vi: true,
+      parent: gitStatusBox
+    });
 
-		list.focus();
-	} else {
-		gitStatusBox.setContent('{center}{yellow-fg}Nothing to commit (working directory clean){/yellow-fg}{/center}');
-	}
+    list.focus();
+  } else {
+    gitStatusBox.setContent('{center}{yellow-fg}Nothing to commit (working directory clean){/yellow-fg}{/center}');
+  }
 
 	screen.append(gitStatusBox);
 	screen.render();
