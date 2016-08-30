@@ -13,7 +13,7 @@ const gitStatusBox = blessedBox({
 	  style: {
 	    fg: 'white',
 	    border: {
-	      fg: '#f0f0f0'
+	      fg: 'green'
 	    }
 	  }
 });
