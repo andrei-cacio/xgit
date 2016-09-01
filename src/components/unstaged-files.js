@@ -5,7 +5,8 @@ const gitStatusBox = blessedBox({
 	top: 'center',
 	left: 'left',
 	width: '50%',
-	height: '80%',
+	height: '78%',
+  label: 'Unstaged files',
 	tags: true,
 	border: {
 	    type: 'line'
@@ -24,10 +25,10 @@ const style = {
 		bg: 'white'
 	},
 	selected: {
-		fg: 'blue'
+		fg: '#99ff99'
 	},
 	item: {
-		fg: 'yellow'
+		fg: 'green'
 	}
 }
 

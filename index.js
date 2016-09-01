@@ -1,12 +1,16 @@
 const blessed = require('blessed');
 const screen = require('./src/components/screen');
 const statusBox = require('./src/components/status-box');
-const gitStatusBox = require('./src/components/git-status-box');
+const unstagedFilesBox = require('./src/components/unstaged-files');
 const stagedFilesBox = require('./src/components/staged-files');
 const repoStore = require('./src/modules/repositories').store;
 const actions = require('./src/modules/repositories').actions;
 const getters = require('./src/modules/repositories').getters;
 const rxflux = require('rxflux').default;
+const registerComponent = require('./src/core/context').registerComponent;
+
+registerComponent('unstagedBox', unstagedFilesBox);
+registerComponent('stagedBox', stagedFilesBox);
 
 const repoPath = process.argv[2];
 
@@ -21,7 +25,7 @@ repoStore.subscribe(newState => {
   const sFiles = (typeof unstagedFiles === 'object') ? stagedFiles.toJS() : stagedFiles;
 
 	statusBox.mount({ originUrl, branch, head }, screen);
-	gitStatusBox.mount({ files: uFiles }, screen);
+	unstagedFilesBox.mount({ files: uFiles }, screen);
   stagedFilesBox.mount({ files: sFiles }, screen);
 });
 

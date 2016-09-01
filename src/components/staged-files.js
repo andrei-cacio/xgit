@@ -5,7 +5,8 @@ const gitStatusBox = blessedBox({
   top: 'center',
   left: '50%',
   width: '50%',
-  height: '80%',
+  height: '78%',
+  label: 'Staged files',
   tags: true,
   border: {
     type: 'line'
@@ -13,21 +14,21 @@ const gitStatusBox = blessedBox({
   style: {
     fg: 'white',
     border: {
-      fg: 'blue'
+      fg: 'red'
     }
   }
 });
 
 const style = {
-  top: 'center',
+  top: '30%',
   border: {
     bg: 'white'
   },
   selected: {
-    fg: 'blue'
+    fg: '#ff9999'
   },
   item: {
-    fg: 'yellow'
+    fg: 'red'
   }
 }
 
