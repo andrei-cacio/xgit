@@ -4,6 +4,7 @@ const statusBox = require('./src/components/status-box');
 const unstagedFilesBox = require('./src/components/unstaged-files');
 const stagedFilesBox = require('./src/components/staged-files');
 const repoModule = require('./src/modules/repositories');
+const contextModule = require('./src/modules/context');
 const rxflux = require('rxflux').default;
 
 const repoPath = process.argv[2];
@@ -21,6 +22,7 @@ repoModule.store.subscribe(newState => {
 	statusBox.mount({ originUrl, branch, head }, screen);
 	unstagedFilesBox.mount({ files: uFiles }, screen);
   stagedFilesBox.mount({ files: sFiles }, screen);
+  contextModule.actions.focus();
 });
 
 repoModule.actions.parseRepo(repoPath);

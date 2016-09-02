@@ -23,11 +23,12 @@ function handleFocusing(state) {
         .update('firstToFocus', () => '');
   } else {
     const currentlyFocused = state.get('focusedElement');
-    const nextToFocus = state.get('focusNext').pop();
+    const nextToFocus = state.get('focusNext').last();
 
     return state
       .update('focusedElement', () => nextToFocus)
-      .update('focusNext', focusNext => focusNext.unshift(currentlyFocused));
+      .update('focusNext', focusNext => focusNext.unshift(currentlyFocused))
+      .update('focusNext', focusNext => focusNext.pop());
   }
 }
 

@@ -14,9 +14,8 @@ defaultScreen.key(['tab'], function() {
 });
 
 contextModule.store.subscribe(newState => {
-  console.log(newState.toJS());
   const focusedElementName = newState.get('focusedElement');
-  console.log(focusedElementName);
+
   if (context.hasElement(focusedElementName)) {
     context.getComponent(focusedElementName).focus();
   }
