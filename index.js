@@ -1,25 +1,29 @@
 const blessed = require('blessed');
 const screen = require('./src/components/screen');
 const statusBox = require('./src/components/status-box');
-const gitStatusBox = require('./src/components/git-status-box');
-const helpBox = require('./src/components/help-box');
-const repoStore = require('./src/modules/repositories').store;
-const actions = require('./src/modules/repositories').actions;
+const unstagedFilesBox = require('./src/components/unstaged-files');
+const stagedFilesBox = require('./src/components/staged-files');
+const repoModule = require('./src/modules/repositories');
+const contextModule = require('./src/modules/context');
+const rxflux = require('rxflux').default;
 
 const repoPath = process.argv[2];
 
-repoStore.subscribe(newState => {
+repoModule.store.subscribe(newState => {
 	const originUrl = newState.get('originUrl');
 	const branch = newState.get('branch');
 	const head = newState.get('head').toJS();
-  const statusFiles = newState.get('statusFiles');
-	const files = (typeof statusFiles === 'object') ? statusFiles.toJS() : statusFiles;
+  const unstagedFiles = rxflux.evaluateGetter(repoModule.getters.unstagedFiles);
+	const uFiles = (typeof unstagedFiles === 'object') ? unstagedFiles.toJS() : unstagedFiles;
+
+  const stagedFiles = rxflux.evaluateGetter(repoModule.getters.stagedFiles);
+  const sFiles = (typeof unstagedFiles === 'object') ? stagedFiles.toJS() : stagedFiles;
 
 	statusBox.mount({ originUrl, branch, head }, screen);
-	gitStatusBox.mount({ files }, screen);
+	unstagedFilesBox.mount({ files: uFiles }, screen);
+  stagedFilesBox.mount({ files: sFiles }, screen);
+  contextModule.actions.focus();
 });
 
-actions.parseRepo(repoPath);
-helpBox.mount(screen);
-
+repoModule.actions.parseRepo(repoPath);
 
