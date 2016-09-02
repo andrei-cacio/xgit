@@ -33,7 +33,7 @@ const style = {
 }
 
 function mount(data, screen) {
-	if (!data.files) {
+	if (data.files.length === 0) {
 		gitStatusBox.setContent('{center} Loading ... {/center}');
 	} else if (data.files.length) {
     const list = blessedList({
