@@ -1,5 +1,7 @@
 const blessedBox = require('blessed').box;
-const blessedList = require('blessed').list;
+const context = require('../core/context');
+const contextModule = require('../modules/context');
+const getList = require('./list');
 
 const gitStatusBox = blessedBox({
   top: 'center',
@@ -19,30 +21,17 @@ const gitStatusBox = blessedBox({
   }
 });
 
-const style = {
-  top: '30%',
-  border: {
-    bg: 'white'
-  },
-  selected: {
-    fg: '#ff9999'
-  },
-  item: {
-    fg: 'red'
-  }
-}
-
 function mount(data, screen) {
  if (data.files.length) {
-    const list = blessedList({
-      items: data.files,
-      keys: true,
-      style: style,
-      vi: true,
-      parent: gitStatusBox
+    const list = getList(data.files, {
+      parent: gitStatusBox,
+      colors: {
+        selected: '#ffcfcf',
+        item: 'red'
+      }
     });
-
-    list.focus();
+    context.registerComponent('stagedList', list);
+    contextModule.actions.addNextToFocus('stagedList');
   } else {
    gitStatusBox.setContent('{center}{yellow-fg}Nothing to show {/yellow-fg}{/center}');
  }

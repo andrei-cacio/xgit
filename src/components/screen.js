@@ -1,5 +1,6 @@
 const screen = require('blessed').screen;
 const context = require('../core/context');
+const contextModule = require('../modules/context');
 
 const defaultScreen = screen({ smartCSR: true });
 defaultScreen.title = 'xGit';
@@ -9,7 +10,16 @@ defaultScreen.key(['escape', 'q', 'C-c'], function(ch, key) {
 });
 
 defaultScreen.key(['tab'], function() {
-  context.getComponent('unstagedBox');
+  contextModule.actions.focus();
+});
+
+contextModule.store.subscribe(newState => {
+  console.log(newState.toJS());
+  const focusedElementName = newState.get('focusedElement');
+  console.log(focusedElementName);
+  if (context.hasElement(focusedElementName)) {
+    context.getComponent(focusedElementName).focus();
+  }
 });
 
 module.exports = defaultScreen;

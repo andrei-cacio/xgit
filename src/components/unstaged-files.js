@@ -1,7 +1,9 @@
 const blessedBox = require('blessed').box;
-const blessedList = require('blessed').list;
+const context = require('../core/context');
+const getList = require('./list');
+const contextActions = require('../modules/context/actions');
 
-const gitStatusBox = blessedBox({
+const UnstagedFilesBox = blessedBox({
 	top: 'center',
 	left: 'left',
 	width: '50%',
@@ -19,37 +21,24 @@ const gitStatusBox = blessedBox({
 	  }
 });
 
-const style = {
-	top: 'center',
-	border: {
-		bg: 'white'
-	},
-	selected: {
-		fg: '#99ff99'
-	},
-	item: {
-		fg: 'green'
-	}
-}
-
 function mount(data, screen) {
 	if (data.files.length === 0) {
-    gitStatusBox.setContent('{center}{yellow-fg}Nothing to commit (working directory clean){/yellow-fg}{/center}');
+    UnstagedFilesBox.setContent('{center}{yellow-fg}Nothing to commit (working directory clean){/yellow-fg}{/center}');
 	} else if (data.files.length) {
-    const list = blessedList({
-      items: data.files,
-      keys: true,
-      style: style,
-      vi: true,
-      parent: gitStatusBox
+    const list = getList(data.files, {
+      parent: UnstagedFilesBox,
+      colors: {
+        item: 'green',
+        selected: '#DBFFE5'
+      }
     });
-
-    list.focus();
+    context.registerComponent('unstagedList', list);
+    contextActions.makeFirstToFocus('unstagedList');
   } else {
-    gitStatusBox.setContent('{center} Loading ... {/center}');
+    UnstagedFilesBox.setContent('{center} Loading ... {/center}');
   }
 
-	screen.append(gitStatusBox);
+	screen.append(UnstagedFilesBox);
 	screen.render();
 }
 
