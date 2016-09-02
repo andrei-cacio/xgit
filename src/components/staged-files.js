@@ -43,7 +43,9 @@ function mount(data, screen) {
     });
 
     list.focus();
-  }
+  } else {
+   gitStatusBox.setContent('{center}{yellow-fg}Nothing to show {/yellow-fg}{/center}');
+ }
 
   screen.append(gitStatusBox);
   screen.render();
