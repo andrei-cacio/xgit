@@ -34,7 +34,7 @@ const style = {
 
 function mount(data, screen) {
 	if (data.files.length === 0) {
-		gitStatusBox.setContent('{center} Loading ... {/center}');
+    gitStatusBox.setContent('{center}{yellow-fg}Nothing to commit (working directory clean){/yellow-fg}{/center}');
 	} else if (data.files.length) {
     const list = blessedList({
       items: data.files,
@@ -46,7 +46,7 @@ function mount(data, screen) {
 
     list.focus();
   } else {
-    gitStatusBox.setContent('{center}{yellow-fg}Nothing to commit (working directory clean){/yellow-fg}{/center}');
+    gitStatusBox.setContent('{center} Loading ... {/center}');
   }
 
 	screen.append(gitStatusBox);
