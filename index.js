@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const blessed = require('blessed');
 const screen = require('./src/components/screen');
 const statusBox = require('./src/components/status-box');
