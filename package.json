@@ -1,6 +1,6 @@
 {
   "name": "xgit",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "bin": {
     "xgit": "./index.js"
   },
@@ -12,10 +12,10 @@
   "author": "Andrei Cacio",
   "license": "MIT",
   "devDependencies": {
-    "blessed": "^0.1.81",
-    "nodegit": "^0.14.1"
   },
   "dependencies": {
+    "blessed": "^0.1.81",
+    "nodegit": "^0.14.1",
     "rxflux": "git+https://github.com/andrei-cacio/rxflux.git",
     "rxjs": "^5.0.0-beta.11"
   },
