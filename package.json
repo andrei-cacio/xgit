@@ -1,6 +1,6 @@
 {
   "name": "xgit",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A minimalistic, productivity driven git terminal interface",
   "main": "index.js",
   "scripts": {
