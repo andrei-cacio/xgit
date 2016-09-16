@@ -1,7 +1,6 @@
 const blessedBox = require('blessed').box;
-const context = require('../core/context');
 const getList = require('./list');
-const contextActions = require('../modules/context/actions');
+const contextModule = require('../modules/context');
 
 const UnstagedFilesBox = blessedBox({
 	top: '13%',
@@ -32,8 +31,8 @@ function mount(data, screen) {
         selected: '#DBFFE5'
       }
     });
-    context.registerComponent('unstagedList', list);
-    contextActions.makeFirstToFocus('unstagedList');
+    contextModule.context.registerComponent('unstagedList', list);
+    contextModule.actions.makeFirstToFocus('unstagedList');
   } else {
     UnstagedFilesBox.setContent('{center} Loading ... {/center}');
   }

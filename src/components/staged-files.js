@@ -1,5 +1,4 @@
 const blessedBox = require('blessed').box;
-const context = require('../core/context');
 const contextModule = require('../modules/context');
 const getList = require('./list');
 
@@ -30,7 +29,7 @@ function mount(data, screen) {
         item: 'red'
       }
     });
-    context.registerComponent('stagedList', list);
+   contextModule.context.registerComponent('stagedList', list);
     contextModule.actions.addNextToFocus('stagedList');
   } else {
    gitStatusBox.setContent('{center}{yellow-fg}Nothing to show {/yellow-fg}{/center}');
