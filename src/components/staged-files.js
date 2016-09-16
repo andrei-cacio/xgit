@@ -4,10 +4,10 @@ const contextModule = require('../modules/context');
 const getList = require('./list');
 
 const gitStatusBox = blessedBox({
-  top: 'center',
+  top: '13%',
   left: '50%',
   width: '50%',
-  height: '78%',
+  height: '90%',
   label: 'Staged files',
   tags: true,
   border: {

@@ -4,10 +4,10 @@ const getList = require('./list');
 const contextActions = require('../modules/context/actions');
 
 const UnstagedFilesBox = blessedBox({
-	top: 'center',
+	top: '13%',
 	left: 'left',
 	width: '50%',
-	height: '78%',
+	height: '90%',
   label: 'Unstaged files',
 	tags: true,
 	border: {

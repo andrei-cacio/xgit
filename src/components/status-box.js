@@ -4,7 +4,7 @@ const statusBox = box({
 	top: 'top',
 	left: 'center',
 	width: '100%',
-	height: '10%',
+	height: '13%',
 	tags: true,
 	border: {
 	    type: 'line'
